@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% block content %}
+<div class="relative" align="center">
+    <h1 class="letrah" align="left">Seu perfil.</h1>
+        {% if perfil %}
+            {% for perfil in perfil %}
+
+     <table class="table table-borderless" align="center" >
+      <thead >
+
+      </thead>
+      <tbody>
+      <tr>
+         <th scope="row"> Foto:<br><img src="{{perfil.imagem.url }}" class="rounded float-start" alt="{{ dados.nome }}" width="150" height="150"/>
+     </th>
+      </tr>
+            <tr>
+         <th scope="row"> #nick</th>
+          <td>{{perfil.perfilNick}}</td>
+      </tr>
+        <tr>
+         <th scope="row"> Nome:</th>
+          <td>{{perfil.perfilNome}}</td>
+      </tr>
+      <tr>
+          <th scope="row"> Idade:</th>
+          <td>{{perfil.perfilIdade}}</td>
+      </tr>
+      <tr>
+         <th scope="row"> Cidade:</th>
+          <td>{{perfil.perfilCidade}}-{{perfil.perfilCidade.estado}}</td>
+      </tr>
+      <tr>
+         <th scope="row"> Telefone fixo:</th>
+          <td>{{perfil.perfilTelefoneFixo}}</td>
+      </tr>
+      <tr>
+         <th scope="row"> Telefone celular:</th>
+          <td>{{perfil.perfilTelefoneCelular}}</td>
+      </tr>
+      <tr>
+         <th scope="row"> Email:</th>
+          <td>{{perfil.perfilEmail}}</td>
+      </tr>
+      <tr>
+         <th scope="row"> CPF:</th>
+          <td>{{perfil.perfilCPF}}</td>
+      </tr>
+            <tr>
+         <th scope="row"> Validade do CCF:</th>
+          <td>{{perfil.perfilValidadeDoCCF}}</td>
+      </tr>
+            <tr>
+         <th scope="row"> Licença:</th>
+          <td>{{perfil.perfilLicenca}}</td>
+      </tr>
+      <tr>
+         <th scope="row"> Hanbilitações:</th>
+          <td>{{perfil.perfilHabilitacoes}}</td>
+      </tr>
+      <tr>
+         <th scope="row"> MNTE:</th>
+          <td>{{perfil.perfilMNTE}}</td>
+      </tr>
+      </tbody>
+    </table>
+        {% endfor %}
+        {% else %}
+        <h1 class="letrah" align="center">Você não possui perfil!</h1>
+
+      {% endif %}
+      </div>
+{% endblock %}

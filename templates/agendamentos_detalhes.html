@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% block content %}
+<div  align="center">
+  <h1 class="letrah" align="left">Detalhes dos agendamentos.</h1>
+     <table class="table table-borderless" align="center" id="t1" >
+      <thead >
+
+      </thead>
+      <tbody>
+      {% if agendamentos_detalhes %}
+      <tr>
+         <th scope="row"> Base aérea:</th>
+          <td>{{agendamentos_detalhes.agendamentoBaseAerea}}</td>
+      </tr>
+      <tr>
+         <th scope="row"> Marcado Para:</th>
+          <td>{{agendamentos_detalhes.agendamentoData}}</td>
+      </tr>
+        <tr>
+         <th scope="row"> Realizado dia:</th>
+          <td>{{agendamentos_detalhes.agendamentoRealizadoData}}</td>
+      </tr>
+      <tr>
+          <th scope="row"> Aeronave:</th>
+          <td>{{agendamentos_detalhes.agendamentoAeronave}}</td>
+      </tr>
+      <tr>
+         <th scope="row"> Cliente:</th>
+          <td>{{agendamentos_detalhes.agendamentoCliente}}</td>
+      </tr>
+      <tr>
+         <th scope="row"> Status:</th>
+          <td>{{agendamentos_detalhes.agendamentoStatus}}</td>
+      </tr>
+      <tr>
+         <th scope="row"> Observações:</th>
+          <td>{{agendamentos_detalhes.agendamentoObservacoes}}</td>
+      </tr>
+      </tbody>
+    </table>
+ {% else %}
+    <p align="center">Não encontrado agendamento(s).</p>
+  {% endif %}
+    <a href="{% url 'agendar' %}">
+    <div class="d-grid gap-2">
+        <button type="button" class="btn btn-primary">Realizar agendamentos</button>
+    </div>
+    </a>
+    <div>
+    <a href="{% url 'agendamentos' %}">&laquo; Voltar para lista de agendamentos.</a>
+    </div>
+
+
+</div>
+{% endblock %}

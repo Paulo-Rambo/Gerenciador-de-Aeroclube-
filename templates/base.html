@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    {% block title %}<title>Aeroclube Marília</title>{% endblock %}
+    {% load static %}
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+<div class="container-fluid">
+
+    <div class="divtop">
+<img src="{% static 'images/aeroclube1.png' %}" width="100%" alt="Venha fazer parte!">
+    </div>
+    <div class="left">
+  {% block sidebar %}
+          <ul class="sidebar-nav">
+              {% if user.is_authenticated %}
+
+     <li>User: {{ user.get_username }}</li>
+     <li><a href="{% url 'logout_page' %}?next={{request.path}}">Logout</a></li>
+   {% else %}
+     <li><a href="{% url 'login_page' %}?next={{request.path}}">Login</a></li>
+   {% endif %}
+   <br><br>
+              <div align="center">
+              <div class="d-grid gap-2" role="group" aria-label="Menu" >
+                 <a class="btn btn-outline-primary" role="button" href="{% url 'inicio' %}" data-bs-target="Iframe Principal">Início</a>
+                 <a class="btn btn-outline-primary" role="button" href="{% url 'usuario' %}" data-bs-target="Iframe Principal">Perfil</a>
+                 <a class="btn btn-outline-primary" role="button" href="{% url 'agendamentos' %}" data-bs-target="Iframe Principal">Agendamentos</a>
+                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Aulas</button>
+        <div class="collapse" id="collapseExample">
+            <div class="d-grid gap-2" role="group" aria-label="Menu" >
+      <a class="btn btn-secondary" role="button" href="{% url 'inicio' %}">Aula de coisa</a>
+      <a class="btn btn-secondary" role="button" href="{% url 'agendamentos' %}">Aula de tal</a>
+      <a class="btn btn-secondary" role="button" href="{% url 'inicio' %}">Outra aulal</a>
+
+</div>
+    </div>
+                  <a class="btn btn-outline-primary" href="{% url 'agendamentos' %}">Contatar</a>
+              </div>
+
+              </div>
+          </ul>
+        {% endblock %}
+</div>
+
+
+        <div class="mid">
+            <div class="shadow-sm p-3 mb-5 bg-body rounded">
+               <button class="btn btn-outline-primary" type="button" role="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">Fast check.</button>
+                <div class="collapse" id="collapse2">
+                    <br>
+                    <div class="card-group">
+                        {% if atrasado %}
+                        {% for a in atrasado %}
+                        <div class="card text-dark bg-warning mb-3" style="max-width: 18rem;">
+                            <div class="card-header">Aula atrasada</div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ a.agendamentoAulas }}</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <br>Cidade Base: {{a.agendamentoBaseAerea}}
+                                    <br>Instrutor: {{a.agendamentoInstrutor1}}
+                                {% if a.agendamentoInstrutor2 %}
+                                    <br>Instrutor 2: {{a.agendamentoInstrutor2}}
+                                {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        &nbsp &nbsp
+                        {% if ultimo %}
+                        {% for a in ultimo %}
+                        <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+                            <div class="card-header">Última aula agendada</div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ a.agendamentoAulas }}</h5>
+                                <p class="card-text">Realizada dia: {{ a.agendamentoData}}
+                                    <br>Cidade Base: {{a.agendamentoBaseAerea}}
+                                    <br>Instrutor: {{a.agendamentoInstrutor1}} </p>
+                            </div>
+                        </div>
+
+      {% endfor %}
+
+      {% else %}
+      {{ naotem }}
+
+      {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        {% block content %}
+
+<iframe src="{{conteudo}}" title="Iframe Principal" name="Iframe Principal" id="Iframe Principal" referrerpolicy="unsafe-url">
+           </iframe>
+
+            {% endblock %}
+
+        </div>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% block content %}
+<div class="relative" align="center">
+  <h1 class="letrah" align="left" >Lista de agendamentos.</h1>
+
+     <table class="table" align="center">
+      <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Criado em</th>
+            <th scope="col">Data</th>
+            <th scope="col">Aula</th>
+            <th scope="col">Aeronave</th>
+            <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% if page_obj %}
+  {% for agendamentos in page_obj %}
+        <tr>
+            <th scope="row">#{% cycle '1' '2' '3' '4' '5' '6' '7' '8' %}</th>
+           <td>{{agendamentos.criado}}</td>
+          <td>{{agendamentos.agendamentoData}}</td>
+          <td><a href="{{ agendamentos.get_absolute_url }}">{{agendamentos.agendamentoAulas}}</a></td>
+          <td>{{agendamentos.agendamentoAeronave}}</td>
+          <td>{{agendamentos.agendamentoStatus}}</td>
+        </tr>
+  {% endfor %}
+
+      </tbody>
+    </table>
+ {% else %}
+    <p align="center">Não encontrado agendamento(s).</p>
+  {% endif %}
+    <a href="{% url 'agendar' %}">
+    <div class="d-grid gap-2">
+        <button type="button" class="btn btn-primary">Realizar agendamentos</button>
+    </div>
+    </a>
+
+     <div class="pagination">
+        <span class="current">
+                <br>
+            </span>
+    </div>
+
+
+<div class="pagination">
+<nav aria-label="{{ page_obj.paginator.num_pages }}">
+  <ul class="pagination">
+      {% if page_obj.has_previous %}
+    <li class="page-item"><a class="page-link" href="?page=1">Primeira</a></li>
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+      {% endif %}
+      {% if page_obj.previous_page_number|add:'-2' > 0 %}
+      <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number|add:'-2' }}">{{ page_obj.previous_page_number|add:'-2' }}</a></li>
+      {% endif %}
+      {% if page_obj.previous_page_number|add:'-1' > 0 %}
+      <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number|add:'-1' }}">{{ page_obj.previous_page_number|add:'-1' }}</a></li>
+      {% endif %}
+      {% if page_obj.previous_page_number < page_obj.number %}
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
+      {% endif %}
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a></li>
+      {% if page_obj.next_page_number <= page_obj.paginator.num_pages %}
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
+      {% endif %}
+      {% if page_obj.number|add:'2' <= page_obj.paginator.num_pages %}
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number|add:'1' }}">{{ page_obj.next_page_number|add:'1' }}</a></li>
+      {% endif %}
+      {% if page_obj.has_next %}
+      {% if page_obj.number|add:'3' <= page_obj.paginator.num_pages %}
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number|add:'2' }}">{{ page_obj.next_page_number|add:'2' }}</a></li>
+      {% endif %}
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Última</a></li>
+      {% endif %}
+  </ul>
+      <div align="left"><h5>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.</h5></div>
+</nav>
+    </div>
+</div>
+{% endblock %}

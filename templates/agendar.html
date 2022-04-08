@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+<!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+<!--Font Awesome (added because you use icons in your prepend/append)-->
+<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+
+<!-- Inline CSS based on choices in "Settings" tab -->
+<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
+
+
+  <h1 class="letrah" align="left">Agendar.</h1>
+
+  <div class="row g-3" >
+        <form class="row g-3" action="{% url 'agendar' %}" method="post" autocomplete="off">
+            {{ form.non_field_errors }}
+          {% csrf_token %}
+            <div class="col-md-7">
+                {{ form.agendamentoAulas.label_tag }}
+                <select id="id_agendamentoAulas" class="form-select" name="agendamentoAulas">
+                {% for aulas in form.agendamentoAulas %}
+                {{ aulas }}
+                {% endfor %}
+                    </select>
+                {{ form.agendamentoAulas.errors }}
+            </div>
+            <div class="col-md-5">
+                {{ form.agendamentoAeronave.label_tag }}
+                <select id="id_agendamentoAeronave" class="form-select" name="agendamentoAeronave">
+                {% for aeronaves in form.agendamentoAeronave %}
+                {{ aeronaves }}
+                  {% endfor %}
+                </select>
+                {{ form.agendamentoAeronave.errors }}
+            </div>
+            <div class="col-md-6">
+                {{ form.agendamentoBaseAerea.label_tag }}
+                <select id="id_agendamentoBaseAerea" class="form-select" name="agendamentoBaseAerea" required="">
+                {% for base in form.agendamentoBaseAerea %}
+                    {{ base }}
+                {% endfor %}
+                </select>
+                {{ form.agendamentoBaseAerea.errors }}
+            </div>
+
+            <div class="col-sm">
+                <!-- HTML Form (wrapped in a .bootstrap-iso div) -->
+  <div class="row">
+   <div class="col-sm">
+      <label class="control-label" for="id_agendamentoData">
+       Data
+      </label>
+    <i class="fa fa-calendar"></i>:
+       <input class="form-control" id="id_agendamentoData" name="agendamentoData" placeholder="DD/MM/AAAA" type="text"/>
+     </div>
+
+  </div>
+            </div>
+            <div class="col-sm">
+                {{ form.agendamentoHorario.label_tag }}
+                <input type="text" id="id_agendamentoHorario" class="form-control" name="agendamentoHorario" required="">
+
+                    {{ form.agendamentoHorario.errors }}
+            </div>
+            <div class="col-md-6">
+                {{ form.agendamentoInstrutor1.label_tag }}
+                <select id="id_agendamentoInstrutor1" class="form-select" name="agendamentoInstrutor1" required="">
+                {% for escolha in escolhas %}
+                {% for instrutor in form.agendamentoInstrutor1 %}
+                    {% if escolha_id == instrutor_id %}
+                {{instrutor}}
+                    {% endif %}
+                {% endfor %}
+                {% endfor %}
+                </select>
+                {{ form.agendamentoInstrutor1.errors }}
+            </div>
+            <div class="col-md-6">
+                {{ form.agendamentoInstrutor2.label_tag }}
+                <select id="id_agendamentoInstrutor2" class="form-select" name="agendamentoInstrutor2" required="">
+                {% for escolha in escolhas %}
+                {% for instrutor in form.agendamentoInstrutor2 %}
+                    {% if escolha_id == instrutor_id %}
+                {{instrutor}}
+                    {% endif %}
+                {% endfor %}
+                {% endfor %}
+                </select>
+                {{ form.agendamentoInstrutor2.errors }}
+            </div>
+            <div class="col-12">
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                    <label for="floatingTextarea2">Observações:</label>
+                </div>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+
+        </form>
+    </div>
+
+
+<!-- Script do calendário -->
+<!-- Extra JavaScript/CSS added manually in "Settings" tab -->
+<!-- Include jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Include Date Picker -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+<script>
+    $(document).ready(function(){
+        var date_input=$('input[name="agendamentoData"]'); //our date input has the name "agendamentoData"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'dd/mm/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    })
+</script>
+
+{% endblock %}

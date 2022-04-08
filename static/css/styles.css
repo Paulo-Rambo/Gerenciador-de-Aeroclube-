@@ -1,0 +1,87 @@
+.sidebar-nav {
+    margin-top: 10%;
+    padding: 0;
+    list-style: none;
+    margin-left: 10%;
+    text-decoration: none;
+}
+div.relative {
+  padding-bottom:0%;
+  margin-top: 5%;
+  font-family:"Times New Roman", Times, Sans-serif;
+  font-weight: 500;
+}
+#t1 {
+  width: 100%;
+  margin-left: 0%;
+}
+a:link{
+ text-decoration:none;
+}
+p1.letra {
+  font-family:"Times New Roman", Times, sans-serif;
+  font-weight: 600;
+}
+h1.letrah {
+  font-family: Helvetica, sans-serif;
+  font-weight: 600;
+  color: #52a8ff;
+}
+.letrah2 {
+  font-family: Brush Script MT;
+}
+
+h5.coco {
+  font-family: Helvetica, sans-serif;
+  font-weight: 400;
+  color: #52a8ff;
+}
+
+th {
+  font-family:"Times New Roman", Times, sans-serif;
+  font-weight: 600;
+}
+
+td {
+  font-family: Helvetica, sans-serif;
+  font-weight: 400;
+  color: #8cd9ff;
+ }
+
+ form {
+  font-family: Helvetica, sans-serif;
+  font-weight: 600;
+  color: #8cd9ff;
+  text-align: left;
+ }
+
+.column {
+  float: left;
+  padding: 10px;
+  left width:25%;
+}
+
+.divtop{
+  padding-bottom: 0%;
+  float: top;
+  margin-top: 1%;
+  margin-left: 5%
+  width: 100%;
+  font-family:"Times New Roman", Times, Sans-serif;
+  font-weight: 500;
+  background-color: #218cff
+}
+.left{
+  float:left;
+  width:15%;
+  font-family:"Times New Roman", Times, Sans-serif;
+  font-weight: 500;
+  margin-sidebar: 0%
+  background-color: #8ebf42
+}
+.mid{
+  margin-top: 3%;
+  margin-left: 5%;
+  float:left;
+  width:63%;
+}
